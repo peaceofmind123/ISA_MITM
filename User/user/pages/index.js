@@ -30,11 +30,13 @@ export default function Home() {
 
           </Card>
           <Card title={'Encrypt and send message'}>
-              <div>
+              <div style={{minWidth:"40rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
+
                   <Input placeholder={'message'} onChange={e => {}}/>
+                  <Button type={"primary"}>Send</Button>
               </div>
               <div style={{minWidth:"40rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
-                  <Button type={"primary"}>Send</Button>
+
                   <Text></Text>
               </div>
 

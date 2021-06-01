@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "startDNS": "node DNS_server/index"
+    "startDNS": "node DNS_server/index",
+    "startServer": "yarn --cwd ./server dev -p 4000",
+    "startUser": "yarn --cwd ./User/user dev -p 3000",
+    "startAttacker": "yarn --cwd ./attacker dev -p 5500",
+    "start": "npm run startDNS & npm run startServer & npm run startUser & npm run startAttacker"
   },
   "author": "ashish paudel",
   "license": "ISC",
