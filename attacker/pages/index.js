@@ -18,13 +18,23 @@ export default function Home() {
                     <Text></Text>
                 </div>
             </Card>
+            <Card title={'Server\'s public key'}>
+                <div style={{minWidth:"40rem", marginBottom:"2rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
+                    <Text>Public Key</Text>
+                    <Text></Text>
+                </div>
+            </Card>
             <Card title={'Messages'}>
-                <div style={{minWidth:"40rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
-                    <Text>Received Messages:</Text>
+                <div style={{minWidth:"40rem", marginBottom:"2rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
+                    <Text>Encrypted message</Text>
+                    <Text></Text>
+                </div>
+                <div style={{minWidth:"40rem", marginBottom:"2rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
+                    <Text>Decrypted message</Text>
                     <Text></Text>
                 </div>
             </Card>
         </div>
-      </>
+        </>
   )
 }
