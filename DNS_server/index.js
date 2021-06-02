@@ -1,9 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 
 const app = express();
 
+app.use(cors())
 app.get('/B', (req, res) => {
-    res.send('http://localhost:6000');
+    res.json({address: 'http://localhost:5500'});
 });
 
 app.listen(5000, () => {
