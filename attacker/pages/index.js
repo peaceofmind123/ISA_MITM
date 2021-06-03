@@ -34,7 +34,7 @@ export default function Home() {
         setPublicKey(localStorage.getItem('publicKey') ?? '');
         setPrivateKey(localStorage.getItem('privateKey') ?? '');
         setServerPublicKey(localStorage.getItem('serverPublicKey') ?? '');
-
+        fetch('http://localhost:5500/api/init')
     }, []);
 
     React.useEffect(() => {
@@ -44,7 +44,7 @@ export default function Home() {
             setEncryptedMessages(data.encrypted);
             setDecryptedMessages(data.decrypted);
         };
-      const interval = setInterval(handler,1000);
+      const interval = setInterval(handler,4000);
 
       return () => clearInterval(interval);
     },[])

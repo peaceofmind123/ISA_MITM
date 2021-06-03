@@ -19,7 +19,7 @@ export default function Home() {
         setPublicKey(localStorage.getItem('publicKey')??'');
         setPrivateKey(localStorage.getItem('privateKey')??'');
         setServerPublicKey(localStorage.getItem('serverPublicKey')??'');
-
+        fetch('http://localhost:3000/api/init')
     }, []);
     const handleGetAddress = async () => {
         const response = await fetch('http://localhost:5000/B', {mode: "cors"}).catch(console.log)

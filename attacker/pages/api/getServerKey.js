@@ -10,6 +10,6 @@ export default async (req,res) => {
         res.status(200).json({publicKey: data.publicKey})
     }
     catch(e) {
-
+        res.status(500).send('internal server error')
     }
 }

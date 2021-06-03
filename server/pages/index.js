@@ -12,7 +12,7 @@ export default function Home() {
     React.useEffect(() => {
         setPublicKey(localStorage.getItem('publicKey')??'');
         setPrivateKey(localStorage.getItem('privateKey')??'');
-
+        fetch('http://localhost:4000/api/init')
     }, []);
 
     const handleGenerateKeys =  async () => {
