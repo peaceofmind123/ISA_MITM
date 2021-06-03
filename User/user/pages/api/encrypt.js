@@ -20,7 +20,7 @@ export default (req,res) => {
         res.status(200).json({encrypted: base64Encoded});
     }
     catch(e) {
-
+        res.status(500).json({err: "Internal server error"})
     }
 
 };

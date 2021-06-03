@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import {Button, Card, Typography, Input} from "antd";
+import {Button, Card, Typography, Input, List} from "antd";
 import DefaultCard from "../components/DefaultCard";
 const {Text, Paragraph} = Typography;
 import React from 'react';
@@ -12,6 +12,7 @@ export default function Home() {
     const [privateKey, setPrivateKey] = React.useState('');
     const [serverPublicKey, setServerPublicKey] = React.useState('');
     const [message, setMessage] = React.useState('');
+    const [sentMessages, setSentMessages] = React.useState([]);
 
     React.useEffect(() => {
         setServerAddress(localStorage.getItem('address') ?? '');
@@ -46,8 +47,14 @@ const handleSendMessage = async () => {
     const response = await fetch('http://localhost:3000/api/encrypt?'+ new URLSearchParams({
         message
     }));
-    // const data = await response.json().catch(console.log);
-    // console.log(data);
+    const data = await response.json().catch(console.log);
+    const {encrypted} = data;
+    const response1 = await fetch(`${serverAddress}/api/message?` + new URLSearchParams({
+        message: encrypted
+    }))
+    const data1 = await response1.json().catch(console.log);
+    setSentMessages([message, ...sentMessages])
+
 };
 
   return (
@@ -97,11 +104,16 @@ const handleSendMessage = async () => {
                   <Input placeholder={'message'} value={message} onChange={(e)=> setMessage(e.target.value)}/>
                   <Button type={"primary"} onClick={handleSendMessage}>Send</Button>
               </div>
-              <div style={{minWidth:"40rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
-
-                  <Text></Text>
+              <div style={{minWidth:"40rem", margin:"2rem 0", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
+                  <Text>Sent Messages</Text>
               </div>
-
+              <div style={{minWidth:"40rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
+                  {sentMessages.length ? <div>
+                      {sentMessages.map((m,i) =><div key={i} style={{marginBottom: '1rem'}}>
+                          <Text >{m}</Text>
+                      </div>)}
+                  </div>: null}
+              </div>
           </Card>
 
       </div>
