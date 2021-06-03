@@ -16,7 +16,7 @@ export default async (req, res) => {
         }
     });
     try{
-        fs.writeFileSync(`${__dirname}/keys.json'}`, JSON.stringify({publicKey, privateKey}), {flag:'w'}) ;
+        fs.writeFileSync(`${__dirname}/keys.json`, JSON.stringify({publicKey, privateKey}), {flag:'w'}) ;
 
     }
     catch(e) {

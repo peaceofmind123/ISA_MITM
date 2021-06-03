@@ -10,10 +10,14 @@ export default function Home() {
     const [serverAddress, setServerAddress] = React.useState('');
     const [publicKey, setPublicKey] = React.useState('');
     const [privateKey, setPrivateKey] = React.useState('');
+    const [serverPublicKey, setServerPublicKey] = React.useState('');
+
+
     React.useEffect(() => {
         setServerAddress(localStorage.getItem('address') ?? '');
         setPublicKey(localStorage.getItem('publicKey')??'');
         setPrivateKey(localStorage.getItem('privateKey')??'');
+        setServerPublicKey(localStorage.getItem('serverPublicKey')??'');
 
     }, []);
     const handleGetAddress = async () => {
@@ -32,12 +36,13 @@ export default function Home() {
     };
 
     const handleSendFetchRequest = async () => {
-        const response = await fetch(`${serverAddress}/api/getKey`, {mode:'cors'}).catch(console.log)
+        console.log(serverAddress);
+        const response = await fetch(`http://localhost:5500/api/getKey`, {mode:'cors'}).catch(console.log)
         const data = await response.json().catch(console.log);
-        setPublicKey(data?.publicKey ?? '');
-        setPrivateKey(data?.privateKey ?? '');
-        localStorage.setItem('publicKey', data?.publicKey ?? '')
-        localStorage.setItem('privateKey', data?.privateKey ?? '');
+        console.log(data);
+        setServerPublicKey(data.publicKey);
+        localStorage.setItem('serverPublicKey', data?.publicKey ?? '');
+
     }
   return (
       <>
@@ -68,9 +73,15 @@ export default function Home() {
               </div>
           </Card>
           <Card title={'Send public key fetch request to server'}>
+              <div style={{minWidth:"40rem", marginBottom:"2rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
+                  <Button type={"primary"} onClick={handleSendFetchRequest}>Send</Button>
+
+              </div>
               <div style={{minWidth:"40rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
-                  <Button type={"primary"}>Send</Button>
-                  <Text></Text>
+                  <div style={{padding:"0 2rem 0 0"}}>
+                      <Text>Server Public Key</Text>
+                  </div>
+                  <Paragraph ellipsis={{ rows: 2, expandable: true, symbol: 'more' }}>{serverPublicKey}</Paragraph>
               </div>
 
           </Card>

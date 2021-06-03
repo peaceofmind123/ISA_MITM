@@ -18,6 +18,13 @@ export default function Home() {
         localStorage.setItem('publicKey', data?.publicKey ?? '');
         localStorage.setItem('privateKey', data?.privateKey ?? '');
     };
+
+    const handleGetServerPublicKey = async () => {
+        const response = await fetch('http://localhost:5500/api/getServerKey', {mode:'cors'}).catch(console.log)
+        const data = await response.json().catch(console.log);
+        console.log(data);
+
+    };
     React.useEffect(() => {
         setPublicKey(localStorage.getItem('publicKey')??'');
         setPrivateKey(localStorage.getItem('privateKey')??'');
@@ -42,6 +49,9 @@ export default function Home() {
                 </div>
             </Card>
             <Card title={'Server\'s public key'}>
+                <div style={{minWidth:"40rem", marginBottom:"2rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
+                    <Button type={'primary'} onClick={handleGetServerPublicKey}>Get</Button>
+                </div>
                 <div style={{minWidth:"40rem", marginBottom:"2rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
                     <Text>Public Key</Text>
                     <Text></Text>
