@@ -10,6 +10,8 @@ export default function Home() {
     const [publicKey, setPublicKey] = React.useState('');
     const [privateKey, setPrivateKey] = React.useState('');
     const [serverPublicKey, setServerPublicKey] = React.useState('');
+    const [encryptedMessages, setEncryptedMessages] = React.useState([])
+    const [decryptedMessages, setDecryptedMessages] = React.useState([])
 
     const handleGenerateKeys = async () => {
         const response = await fetch('http://localhost:5500/api/generateKeys', {mode: 'cors'}).catch(console.log)
@@ -39,18 +41,17 @@ export default function Home() {
         const handler = async () => {
             const response = await fetch('http://localhost:5500/api/getMessages', {mode: 'cors'}).catch(console.log)
             const data = await response.json().catch(console.log);
-
+            setEncryptedMessages(data.encrypted);
+            setDecryptedMessages(data.decrypted);
         };
-      const interval = setInterval(() => {
-
-      },1000);
+      const interval = setInterval(handler,1000);
 
       return () => clearInterval(interval);
     },[])
     return (
         <>
             <div style={{
-                height: "100vh",
+                height: "200vh",
                 padding: "0 2rem",
                 display: "flex",
                 flexDirection: "column",
@@ -95,7 +96,8 @@ export default function Home() {
                         marginBottom: "2rem",
                         display: "flex",
                         alignItems: "center",
-                        justifyContent: "space-between"
+                        justifyContent: "space-between",
+                        maxWidth:"100vw"
                     }}>
                         <Button type={'primary'} onClick={handleGetServerPublicKey}>Get</Button>
                     </div>
@@ -116,22 +118,35 @@ export default function Home() {
                     <div style={{
                         minWidth: "40rem",
                         marginBottom: "2rem",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between"
                     }}>
                         <Text>Encrypted messages</Text>
-                        {<Text></Text>}
                     </div>
                     <div style={{
                         minWidth: "40rem",
                         marginBottom: "2rem",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between"
+                        maxWidth:"100%"
+                    }}>
+                        {encryptedMessages.map((m,i) =>
+                                <p key={i}>{m}</p>
+                        )}
+                    </div>
+                    <div style={{
+                        minWidth: "40rem",
+                        marginBottom: "2rem",
                     }}>
                         <Text>Decrypted message</Text>
-                        <Text></Text>
+
+                    </div>
+                    <div style={{
+                        minWidth: "40rem",
+                        marginBottom: "2rem",
+                        maxWidth:"100%"
+                    }}>
+                        {decryptedMessages.map((m,i) =>
+                            <div style={{marginBottom:'2rem 0'}}>
+                                <Text>{m}</Text>
+                            </div>
+                        )}
                     </div>
                 </Card>
             </div>
