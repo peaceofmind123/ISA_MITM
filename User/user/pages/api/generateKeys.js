@@ -11,10 +11,12 @@ export default async (req, res) => {
         privateKeyEncoding: {
             type: 'pkcs8',
             format: 'pem',
+
         }
     });
     try{
-        fs.writeFileSync(`${__dirname}/keys.json`, JSON.stringify({publicKey, privateKey}), {flag:'w'}) ;
+        fs.writeFileSync(`${__dirname}/publickey`, publicKey, {flag:'w'}) ;
+        fs.writeFileSync(`${__dirname}/privatekey`, privateKey, {flag:'w'}) ;
 
     }
     catch(e) {

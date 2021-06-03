@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import {Button, Card, Typography, Input} from "antd";
-
+import {Button, Card, Typography, Input, Collapse} from "antd";
+const {Panel} = Collapse;
 const {Text, Paragraph} = Typography;
 import React from 'react';
 
@@ -34,6 +34,19 @@ export default function Home() {
         setServerPublicKey(localStorage.getItem('serverPublicKey') ?? '');
 
     }, []);
+
+    React.useEffect(() => {
+        const handler = async () => {
+            const response = await fetch('http://localhost:5500/api/getMessages', {mode: 'cors'}).catch(console.log)
+            const data = await response.json().catch(console.log);
+
+        };
+      const interval = setInterval(() => {
+
+      },1000);
+
+      return () => clearInterval(interval);
+    },[])
     return (
         <>
             <div style={{
@@ -107,8 +120,8 @@ export default function Home() {
                         alignItems: "center",
                         justifyContent: "space-between"
                     }}>
-                        <Text>Encrypted message</Text>
-                        <Text></Text>
+                        <Text>Encrypted messages</Text>
+                        {<Text></Text>}
                     </div>
                     <div style={{
                         minWidth: "40rem",

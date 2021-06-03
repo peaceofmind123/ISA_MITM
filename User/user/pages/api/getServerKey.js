@@ -6,7 +6,7 @@ export default async (req,res) => {
     const data = await response.json()
     console.log(data);
     try{
-        fs.writeFileSync(`${__dirname}/serverKey.json`, JSON.stringify({publicKey:data.publicKey}), {flag:'w'}) ;
+        fs.writeFileSync(`${__dirname}/serverKey`, data.publicKey, {flag:'w'}) ;
         res.status(200).json({publicKey: data.publicKey})
     }
     catch(e) {

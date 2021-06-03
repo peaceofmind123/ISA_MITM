@@ -8,13 +8,10 @@ export default (req,res) => {
     }
 
     try {
-        const data = fs.readFileSync(`${__dirname}/serverKey.json`, {flag:'r'});
-        const parsed = JSON.parse(data);
-        const {publicKey} = parsed;
+        const publicKey = fs.readFileSync(`${__dirname}/serverKey`, {encoding:'utf-8'});
+
         const encrypted = crypto.publicEncrypt({
-            key: publicKey,
-            padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
-            oaepHash: "sha256"
+            key: publicKey
         }, Buffer.from(message))
         const base64Encoded = encrypted.toString('base64')
         res.status(200).json({encrypted: base64Encoded});
