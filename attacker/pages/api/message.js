@@ -3,9 +3,8 @@ const fetch = require('node-fetch')
 const crypto = require('crypto')
 
 export default async (req,res) => {
+
     res.setHeader('access-control-allow-origin', '*')
-    const serverPublicKey = fs.readFileSync(`${__dirname}/serverkey`,{encoding:'utf-8'})
-    const privateKey = fs.readFileSync(`${__dirname}/privateKey`,{encoding:'utf-8'})
 
     const message = req?.query?.message;
     if(!message) {
@@ -14,6 +13,10 @@ export default async (req,res) => {
     }
     else {
         try {
+            const serverPublicKey = fs.readFileSync(`${__dirname}/serverKey`,{encoding:'utf-8'})
+            const privateKey = fs.readFileSync(`${__dirname}/privateKey`,{encoding:'utf-8'})
+            console.log(serverPublicKey.length > 0, privateKey.length > 0)
+
             const stream = fs.createWriteStream(`${__dirname}/messages.txt`, {flags:'a+'});
             stream.write(message + '\n');
             stream.end();
@@ -30,7 +33,8 @@ export default async (req,res) => {
             res.status(200).json({status:'success'});
         }
         catch(e) {
-
+            console.log(e)
+            res.status(500).end();
         }
     }
 }
