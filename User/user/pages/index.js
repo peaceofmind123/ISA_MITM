@@ -11,7 +11,7 @@ export default function Home() {
     const [publicKey, setPublicKey] = React.useState('');
     const [privateKey, setPrivateKey] = React.useState('');
     const [serverPublicKey, setServerPublicKey] = React.useState('');
-
+    const [message, setMessage] = React.useState('');
 
     React.useEffect(() => {
         setServerAddress(localStorage.getItem('address') ?? '');
@@ -36,14 +36,20 @@ export default function Home() {
     };
 
     const handleSendFetchRequest = async () => {
-        console.log(serverAddress);
-        const response = await fetch(`http://localhost:5500/api/getKey`, {mode:'cors'}).catch(console.log)
+        const response = await fetch(`http://localhost:3000/api/getServerKey`, {mode:'cors'}).catch(console.log)
         const data = await response.json().catch(console.log);
-        console.log(data);
         setServerPublicKey(data.publicKey);
         localStorage.setItem('serverPublicKey', data?.publicKey ?? '');
 
     }
+const handleSendMessage = async () => {
+    const response = await fetch('http://localhost:3000/api/encrypt?'+ new URLSearchParams({
+        message
+    }));
+    // const data = await response.json().catch(console.log);
+    // console.log(data);
+};
+
   return (
       <>
 
@@ -88,8 +94,8 @@ export default function Home() {
           <Card title={'Encrypt and send message'}>
               <div style={{minWidth:"40rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
 
-                  <Input placeholder={'message'} onChange={e => {}}/>
-                  <Button type={"primary"}>Send</Button>
+                  <Input placeholder={'message'} value={message} onChange={(e)=> setMessage(e.target.value)}/>
+                  <Button type={"primary"} onClick={handleSendMessage}>Send</Button>
               </div>
               <div style={{minWidth:"40rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
 

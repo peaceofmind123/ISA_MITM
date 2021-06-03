@@ -11,8 +11,7 @@ export default async (req, res) => {
         privateKeyEncoding: {
             type: 'pkcs8',
             format: 'pem',
-            cipher: 'aes-256-cbc',
-            passphrase: 'secret'
+
         }
     });
     try{
