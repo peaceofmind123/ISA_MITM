@@ -77,7 +77,10 @@ export default function Home() {
                         justifyContent: "space-between"
                     }}>
                         <Text>Public Key</Text>
-                        <Paragraph ellipsis={{rows: 2, expandable: true, symbol: 'more'}}>{publicKey}</Paragraph>
+                        {
+                            publicKey ? <Paragraph ellipsis={{rows: 2, expandable: true, symbol: 'more'}}>{publicKey}</Paragraph>
+                        : null
+                        }
                     </div>
                     <div style={{
                         minWidth: "40rem",
@@ -86,8 +89,8 @@ export default function Home() {
                         justifyContent: "space-between"
                     }}>
                         <Text>Private Key</Text>
-                        <Paragraph ellipsis={{rows: 2, expandable: true, symbol: 'more'}}>{privateKey}</Paragraph>
-
+                        {privateKey ?<Paragraph ellipsis={{rows: 2, expandable: true, symbol: 'more'}}>{privateKey}</Paragraph>
+                        :null}
                     </div>
                 </Card>
                 <Card title={'Server\'s public key'}>

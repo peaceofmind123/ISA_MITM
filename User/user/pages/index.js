@@ -77,12 +77,17 @@ const handleSendMessage = async () => {
                   <div style={{padding:"0 2rem 0 0"}}>
                       <Text>Public Key</Text>
                   </div>
-                  <Paragraph ellipsis={{ rows: 2, expandable: true, symbol: 'more' }}>{publicKey}</Paragraph>
+                  {
+                      publicKey ? <Paragraph ellipsis={{rows: 2, expandable: true, symbol: 'more'}}>{publicKey}</Paragraph>
+                  : null}
               </div>
               <div style={{minWidth:"40rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
                   <div style={{padding:"0 2rem 0 0"}}>
                       <Text>Private Key</Text>
-                  </div><Paragraph ellipsis={{ rows: 2, expandable: true, symbol: 'more' }}>{privateKey}</Paragraph>
+                  </div>
+                  {privateKey ?
+                      <Paragraph ellipsis={{rows: 2, expandable: true, symbol: 'more'}}>{privateKey}</Paragraph>
+                  : null}
               </div>
           </Card>
           <Card title={'Send public key fetch request to server'}>
@@ -94,7 +99,10 @@ const handleSendMessage = async () => {
                   <div style={{padding:"0 2rem 0 0"}}>
                       <Text>Server Public Key</Text>
                   </div>
-                  <Paragraph ellipsis={{ rows: 2, expandable: true, symbol: 'more' }}>{serverPublicKey}</Paragraph>
+                  {
+                     serverPublicKey ? <Paragraph ellipsis={{rows: 2, expandable: true, symbol: 'more'}}>{serverPublicKey}</Paragraph>
+                  : null
+                  }
               </div>
 
           </Card>

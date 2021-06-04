@@ -50,7 +50,7 @@ export default function Home() {
                 </div>
                 <div style={{minWidth:"40rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
                     <Text>Private Key</Text>
-                    {publicKey ? <Paragraph ellipsis={{ rows: 2, expandable: true, symbol: 'more' }}>{privateKey}</Paragraph>
+                    {privateKey ? <Paragraph ellipsis={{ rows: 2, expandable: true, symbol: 'more' }}>{privateKey}</Paragraph>
                         : null}
                 </div>
             </Card>
