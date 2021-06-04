@@ -1,5 +1,5 @@
 const fs = require('fs')
-
+const crypto = require('crypto')
 export default (req,res) => {
     res.setHeader('access-control-allow-origin', '*')
     const message = req?.query?.message;
@@ -24,6 +24,7 @@ export default (req,res) => {
             res.status(200).json({status:'success'});
         }
         catch(e) {
+            console.log(e);
 
         }
 
