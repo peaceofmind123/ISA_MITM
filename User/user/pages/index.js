@@ -60,7 +60,7 @@ const handleSendMessage = async () => {
   return (
       <>
 
-      <div style={{minHeight:"200vh", padding:"0 2rem", display: "flex", flexDirection:"column", alignItems:'flex-start', justifyContent:"space-around" }}>
+      <div style={{minHeight:"200vh", padding:"0 2rem" }} className={'container'}>
           <Card title={'Get server\'s address'}>
               <div style={{minWidth:"40rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
                   <Button type={"primary"} onClick={handleGetAddress}>Get</Button>

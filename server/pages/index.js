@@ -38,7 +38,7 @@ export default function Home() {
     },[])
     return (
     <>
-        <div style={{height:"100vh", padding:"0 2rem", display: "flex", flexDirection:"column", alignItems:'flex-start', justifyContent:"space-around" }}>
+        <div style={{height:"100vh", padding:"0 2rem",}} className={'container'}>
             <Card title={'Public/private key pair'}>
                 <div style={{minWidth:"40rem", marginBottom:"2rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
                     <Button type={'primary'} onClick={handleGenerateKeys}>Generate</Button>

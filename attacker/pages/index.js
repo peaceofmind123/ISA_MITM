@@ -53,11 +53,8 @@ export default function Home() {
             <div style={{
                 height: "200vh",
                 padding: "0 2rem",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: 'flex-start',
-                justifyContent: "space-around"
-            }}>
+
+            }} className={'container'}>
                 <Card title={'Public/private key pair'}>
                     <div style={{
                         minWidth: "40rem",
