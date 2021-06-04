@@ -8,6 +8,8 @@ import React from 'react';
 export default function Home() {
     const [publicKey, setPublicKey] = React.useState('');
     const [privateKey, setPrivateKey] = React.useState('');
+    const [encryptedMessages, setEncryptedMessages] = React.useState([])
+    const [decryptedMessages, setDecryptedMessages] = React.useState([])
 
     React.useEffect(() => {
         setPublicKey(localStorage.getItem('publicKey')??'');
@@ -23,7 +25,17 @@ export default function Home() {
         localStorage.setItem('publicKey', data?.publicKey ?? '');
         localStorage.setItem('privateKey', data?.privateKey ?? '');
     };
+    React.useEffect(() => {
+        const handler = async () => {
+            const response = await fetch('http://localhost:4000/api/getMessages', {mode: 'cors'}).catch(console.log)
+            const data = await response.json().catch(console.log);
+            setEncryptedMessages(data.encrypted);
+            setDecryptedMessages(data.decrypted);
+        };
+        const interval = setInterval(handler,4000);
 
+        return () => clearInterval(interval);
+    },[])
     return (
     <>
         <div style={{height:"100vh", padding:"0 2rem", display: "flex", flexDirection:"column", alignItems:'flex-start', justifyContent:"space-around" }}>
@@ -44,8 +56,19 @@ export default function Home() {
             </Card>
             <Card title={'Messages'}>
                 <div style={{minWidth:"40rem", display:"flex", alignItems:"center", justifyContent:"space-between"}}>
-                    <Text>Received Messages:</Text>
-                    <Text></Text>
+                    <Text>Received Messages</Text>
+
+                </div>
+                <div style={{
+                    minWidth: "40rem",
+                    marginBottom: "2rem",
+                    maxWidth:"100%"
+                }}>
+                    {decryptedMessages.map((m,i) =>
+                        <div style={{marginBottom:'2rem 0'}}>
+                            <Text>{m}</Text>
+                        </div>
+                    )}
                 </div>
             </Card>
         </div>
